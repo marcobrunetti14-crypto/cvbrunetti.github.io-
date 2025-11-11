@@ -780,7 +780,38 @@
             </div>
         </div>
     </section>
+/* === ANTEPRIME CERTIFICATI === */
+.certificate-preview {
+    width: 100%;
+    max-width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 0 auto 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border: 2px solid var(--light);
+    display: block;
+}
 
+.certificate-preview:hover {
+    transform: scale(1.05);
+    border-color: var(--secondary);
+}
+
+.certificate-placeholder {
+    width: 200px;
+    height: 150px;
+    background: var(--light);
+    border: 2px dashed var(--secondary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
     <!-- Experience Section -->
     <section id="experience" class="experience">
         <div class="container">
