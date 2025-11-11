@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marco Brunetti - Insegnante Tecnico Pratico</title>
+    <style>
+        /* ... (tutto il CSS precedente rimane uguale) ... */
+
+        /* === ANTEPRIME CERTIFICATI === */
+        .certificate-preview {
+            width: 100%;
+            max-width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 0 auto 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border: 2px solid var(--light);
+            display: block;
+        }
+
+        .certificate-preview:hover {
+            transform: scale(1.05);
+            border-color: var(--secondary);
+        }
+
+        .certificate-placeholder {
+            width: 200px;
+            height: 150px;
+            background: var(--light);
+            border: 2px dashed var(--secondary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* ... (il resto del CSS rimane uguale) ... */
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home">Marco Brunetti</a>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Esperienze</a>
+                <a href="#skills" class="nav-link">Competenze</a>
+                <a href="#certifications" class="nav-link">Certificazioni</a>
+                <a href="#contact" class="nav-link">Contatti</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ... (altre sezioni rimangono uguali) ... -->
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="certifications">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Certificazioni</h2>
+                <p class="section-subtitle">Le mie qualifiche professionali</p>
+            </div>
+            <div class="certifications-grid">
+                <div class="certification-item">
+                    <div class="certification-badge">Corso</div>
+                    <div class="certification-icon">📡</div>
+                    <div class="certification-info">
+                        <h3>CCNA</h3>
+                        <p>Formazione completa sulle reti Cisco - competenze avanzate in network infrastructure</p>
+                        <div class="certification-level">Livello Avanzato</div>
+                        <img src="assets/images/certificates/ccna.jpg" alt="Certificato CCNA" class="certificate-preview" onerror="this.style.display='none'; document.getElementById('ccna-placeholder').style.display='flex';">
+                        <div id="ccna-placeholder" class="certificate-placeholder" style="display: none;">
+                            🖼️ Anteprima CCNA
+                        </div>
+                        <button class="btn btn-primary btn-small" onclick="openModal('assets/images/certificates/ccna.jpg', 'Certificato CCNA')">Visualizza Certificato</button>
+                    </div>
+                </div>
+
+                <div class="certification-item">
+                    <div class="certification-badge">Certificazione</div>
+                    <div class="certification-icon">📶</div>
+                    <div class="certification-info">
+                        <h3>EnGenius Certified</h3>
+                        <p>Wireless Professional, Security Professional, Network Professional</p>
+                        <div class="certification-level">Livello Avanzato</div>
+                        <img src="assets/images/certificates/engenius.jpg" alt="Certificato EnGenius" class="certificate-preview" onerror="this.style.display='none'; document.getElementById('engenius-placeholder').style.display='flex';">
+                        <div id="engenius-placeholder" class="certificate-placeholder" style="display: none;">
+                            🖼️ Anteprima EnGenius
+                        </div>
+                        <button class="btn btn-primary btn-small" onclick="openModal('assets/images/certificates/engenius.jpg', 'Certificato EnGenius')">Visualizza Certificato</button>
+                    </div>
+                </div>
+
+                <div class="certification-item">
+                    <div class="certification-badge">Certificazione</div>
+                    <div class="certification-icon">🛡️</div>
+                    <div class="certification-info">
+                        <h3>Fortinet Cybersecurity</h3>
+                        <p>The Evolution of Cybersecurity - Certified Network Specialist</p>
+                        <div class="certification-level">Livello Avanzato</div>
+                        <img src="assets/images/certificates/fortinet-cybersecurity.jpg" alt="Certificato Fortinet" class="certificate-preview" onerror="this.style.display='none'; document.getElementById('fortinet-placeholder').style.display='flex';">
+                        <div id="fortinet-placeholder" class="certificate-placeholder" style="display: none;">
+                            🖼️ Anteprima Fortinet
+                        </div>
+                        <button class="btn btn-primary btn-small" onclick="openModal('assets/images/certificates/fortinet-cybersecurity.jpg', 'Certificato Fortinet')">Visualizza Certificato</button>
+                    </div>
+                </div>
+
+                <div class="certification-item">
+                    <div class="certification-badge">Certificazione</div>
+                    <div class="certification-icon">📞</div>
+                    <div class="certification-info">
+                        <h3>3CX Basic</h3>
+                        <p>Basic Certified Engineer - competenze fondamentali sui sistemi VoIP</p>
+                        <div class="certification-level">Livello Base</div>
+                        <img src="assets/images/certificates/3cx-basic.jpg" alt="Certificato 3CX Basic" class="certificate-preview" onerror="this.style.display='none'; document.getElementById('3cx-basic-placeholder').style.display='flex';">
+                        <div id="3cx-basic-placeholder" class="certificate-placeholder" style="display: none;">
+                            🖼️ Anteprima 3CX Basic
+                        </div>
+                        <button class="btn btn-primary btn-small" onclick="openModal('assets/images/certificates/3cx-basic.jpg', 'Certificato 3CX Basic')">Visualizza Certificato</button>
+                    </div>
+                </div>
+
+                <div class="certification-item">
+                    <div class="certification-badge">Certificazione</div>
+                    <div class="certification-icon">📞</div>
+                    <div class="certification-info">
+                        <h3>3CX Intermediate</h3>
+                        <p>Intermediate Certified Engineer - competenze avanzate sui sistemi VoIP</p>
+                        <div class="certification-level">Livello Intermedio</div>
+                        <img src="assets/images/certificates/3cx-intermediate.jpg" alt="Certificato 3CX Intermediate" class="certificate-preview" onerror="this.style.display='none'; document.getElementById('3cx-intermediate-placeholder').style.display='flex';">
+                        <div id="3cx-intermediate-placeholder" class="certificate-placeholder" style="display: none;">
+                            🖼️ Anteprima 3CX Intermediate
+                        </div>
+                        <button class="btn btn-primary btn-small" onclick="openModal('assets/images/certificates/3cx-intermediate.jpg', 'Certificato 3CX Intermediate')">Visualizza Certificato</button>
+                    </div>
+                </div>
+
+                <div class="certification-item">
+                    <div class="certification-badge">Certificazione</div>
+                    <div class="certification-icon">📞</div>
+                    <div class="certification-info">
+                        <h3>3CX Advanced</h3>
+                        <p>Advanced Certified Engineer - competenze expert sui sistemi VoIP</p>
+                        <div class="certification-level">Livello Avanzato</div>
+                        <img src="assets/images/certificates/3cx-advanced.jpg" alt="Certificato 3CX Advanced" class="certificate-preview" onerror="this.style.display='none'; document.getElementById('3cx-advanced-placeholder').style.display='flex';">
+                        <div id="3cx-advanced-placeholder" class="certificate-placeholder" style="display: none;">
+                            🖼️ Anteprima 3CX Advanced
+                        </div>
+                        <button class="btn btn-primary btn-small" onclick="openModal('assets/images/certificates/3cx-advanced.jpg', 'Certificato 3CX Advanced')">Visualizza Certificato</button>
+                    </div>
+                </div>
+
+                <div class="certification-item">
+                    <div class="certification-badge">Abilitazione</div>
+                    <div class="certification-icon">👨‍🏫</div>
+                    <div class="certification-info">
+                        <h3>Abilitazione B016</h3>
+                        <p>Abilitazione all'insegnamento - Classe di concorso B016</p>
+                        <div class="certification-level">Abilitazione Professionale</div>
+                        <img src="assets/images/certificates/abilitazione-b016.jpg" alt="Abilitazione B016" class="certificate-preview" onerror="this.style.display='none'; document.getElementById('b016-placeholder').style.display='flex';">
+                        <div id="b016-placeholder" class="certificate-placeholder" style="display: none;">
+                            🖼️ Anteprima Abilitazione
+                        </div>
+                        <button class="btn btn-primary btn-small" onclick="openModal('assets/images/certificates/abilitazione-b016.jpg', 'Abilitazione B016')">Visualizza Certificato</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ... (il resto del codice rimane uguale) ... -->
+
+    <script>
+        // ... (tutto il JavaScript precedente rimane uguale) ...
+
+        // Funzione migliorata per aprire i modal
+        function openModal(src, caption) {
+            const modal = document.getElementById('certificateModal');
+            const modalImg = document.getElementById('modalImage');
+            const captionText = document.getElementById('modalCaption');
+
+            modal.style.display = "block";
+            modalImg.src = src;
+            captionText.innerHTML = caption;
+
+            // Se l'immagine non esiste, mostra un messaggio
+            modalImg.onerror = function() {
+                modalImg.style.display = 'none';
+                captionText.innerHTML = caption + ' - Immagine non disponibile';
+            };
+        }
+
+        // ... (il resto dello JavaScript rimane uguale) ...
+    </script>
+</body>
+</html>
