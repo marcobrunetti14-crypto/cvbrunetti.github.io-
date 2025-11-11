@@ -85,7 +85,7 @@
                         <button class="btn btn-primary btn-small" onclick="openModal('assets/images/certificates/ccna.jpg', 'Certificato CCNA')">Visualizza Certificato</button>
                     </div>
                 </div>
-
+                
                 <div class="certification-item">
                     <div class="certification-badge">Certificazione</div>
                     <div class="certification-icon">📶</div>
@@ -100,7 +100,7 @@
                         <button class="btn btn-primary btn-small" onclick="openModal('assets/images/certificates/engenius.jpg', 'Certificato EnGenius')">Visualizza Certificato</button>
                     </div>
                 </div>
-
+                
                 <div class="certification-item">
                     <div class="certification-badge">Certificazione</div>
                     <div class="certification-icon">🛡️</div>
@@ -189,11 +189,11 @@
             const modal = document.getElementById('certificateModal');
             const modalImg = document.getElementById('modalImage');
             const captionText = document.getElementById('modalCaption');
-
+            
             modal.style.display = "block";
             modalImg.src = src;
             captionText.innerHTML = caption;
-
+            
             // Se l'immagine non esiste, mostra un messaggio
             modalImg.onerror = function() {
                 modalImg.style.display = 'none';
