@@ -672,29 +672,58 @@
             margin-bottom: 1rem;
         }
 
-        .certificate-placeholder {
+        /* === CERTIFICATE PREVIEW - NUOVO STILE === */
+        .certificate-preview {
             width: 100%;
             height: 120px;
             background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
-            border: 2px dashed var(--secondary);
+            border: 2px solid var(--secondary);
             border-radius: 10px;
+            overflow: hidden;
+            margin: 0 auto 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .certificate-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .certificate-preview:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .certificate-preview:hover img {
+            transform: scale(1.05);
+        }
+
+        .certificate-preview-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1rem;
-            color: var(--text-light);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: white;
+            font-weight: 600;
             font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
         }
 
-        .certificate-placeholder:hover {
-            background: var(--gradient-2);
-            color: var(--white);
-            border-style: solid;
+        .certificate-preview:hover .certificate-preview-overlay {
+            opacity: 1;
         }
 
-        /* === MODAL === */
+        /* === MODAL AGGIORNATO === */
         .modal {
             display: none;
             position: fixed;
@@ -703,7 +732,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(15, 23, 42, 0.95);
+            background-color: rgba(15, 23, 42, 0.98);
             animation: fadeIn 0.3s ease;
         }
 
@@ -716,10 +745,18 @@
             margin: auto;
             display: block;
             max-width: 90%;
-            max-height: 80%;
-            margin-top: 5%;
+            max-height: 85%;
+            margin-top: 3%;
             border-radius: 10px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            background: white;
+            overflow: hidden;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .close {
@@ -731,6 +768,7 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
+            z-index: 2001;
         }
 
         .close:hover {
@@ -880,6 +918,12 @@
             .timeline-item::before {
                 left: -28px;
             }
+
+            .modal-content {
+                max-width: 95%;
+                max-height: 80%;
+                margin-top: 5%;
+            }
         }
 
         @media (max-width: 768px) {
@@ -982,6 +1026,12 @@
             .contact-form {
                 padding: 1.5rem;
             }
+
+            .modal-content {
+                max-width: 98%;
+                max-height: 70%;
+                margin-top: 10%;
+            }
         }
     </style>
 </head>
@@ -1025,21 +1075,13 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <!-- Opzione 1: Usa il placeholder 
-                    <div class="profile-img-placeholder">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    -->
-                    <!-- Opzione 2: Usa un'immagine con fallback al placeholder -->
-                     
-                    <img src="assets/images/profile.jpg"src="assets/images/profile.jpg" 
+                    <img src="assets/images/profile.jpg" 
                          alt="Marco Brunetti" 
                          class="profile-img" 
                          onerror="this.style.display='none'; this.parentElement.querySelector('.profile-img-placeholder').style.display='flex';">
                     <div class="profile-img-placeholder" style="display:none;">
                         <i class="fas fa-user-tie"></i>
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -1244,7 +1286,7 @@
         </div>
     </section>
 
-    <!-- Certifications Section -->
+    <!-- Certifications Section - COMPLETAMENTE AGGIORNATA -->
     <section id="certifications" class="certifications fade-in">
         <div class="container">
             <div class="section-header">
@@ -1253,6 +1295,7 @@
                 <p class="section-subtitle">Le mie qualifiche professionali</p>
             </div>
             <div class="certifications-grid">
+                <!-- CCNA -->
                 <div class="certification-item">
                     <div class="certification-badge">Corso</div>
                     <div class="certification-icon">📡</div>
@@ -1260,15 +1303,16 @@
                         <h3>CCNA</h3>
                         <p>Formazione completa sulle reti Cisco - competenze avanzate in network infrastructure</p>
                         <div class="certification-level">Livello Avanzato</div>
-                        <div class="certificate-placeholder" onclick="openModal('Certificato CCNA')">
-                            🖼️ Anteprima CCNA
-                           
+                        <div class="certificate-preview" onclick="openModal('Certificato CCNA', 'assets/images/certificates/ccna.jpg')">
+                            <img src="assets/images/certificates/ccna.jpg" alt="Certificato CCNA" 
+                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300/3b82f6/ffffff?text=CCNA'">
+                            <div class="certificate-preview-overlay">Clicca per ingrandire</div>
                         </div>
-                        
-                        <button class="btn btn-primary btn-small" onclick="openModal('Certificato CCNA')">Visualizza</button>
+                        <button class="btn btn-primary btn-small" onclick="openModal('Certificato CCNA', 'assets/images/certificates/ccna.jpg')">Visualizza</button>
                     </div>
                 </div>
 
+                <!-- EnGenius -->
                 <div class="certification-item">
                     <div class="certification-badge">Certificazione</div>
                     <div class="certification-icon">📶</div>
@@ -1276,13 +1320,16 @@
                         <h3>EnGenius Certified</h3>
                         <p>Wireless Professional, Security Professional, Network Professional</p>
                         <div class="certification-level">Livello Avanzato</div>
-                        <div class="certificate-placeholder" onclick="openModal('Certificato EnGenius')">
-                            🖼️ Anteprima EnGenius
+                        <div class="certificate-preview" onclick="openModal('Certificato EnGenius', 'assets/images/certificates/engenius.jpg')">
+                            <img src="assets/images/certificates/engenius.jpg" alt="Certificato EnGenius" 
+                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300/3b82f6/ffffff?text=EnGenius'">
+                            <div class="certificate-preview-overlay">Clicca per ingrandire</div>
                         </div>
-                        <button class="btn btn-primary btn-small" onclick="openModal('Certificato EnGenius')">Visualizza</button>
+                        <button class="btn btn-primary btn-small" onclick="openModal('Certificato EnGenius', 'assets/images/certificates/engenius.jpg')">Visualizza</button>
                     </div>
                 </div>
 
+                <!-- Fortinet -->
                 <div class="certification-item">
                     <div class="certification-badge">Certificazione</div>
                     <div class="certification-icon">🛡️</div>
@@ -1290,13 +1337,16 @@
                         <h3>Fortinet Cybersecurity</h3>
                         <p>The Evolution of Cybersecurity - Certified Network Specialist</p>
                         <div class="certification-level">Livello Avanzato</div>
-                        <div class="certificate-placeholder" onclick="openModal('Certificato Fortinet')">
-                            🖼️ Anteprima Fortinet
+                        <div class="certificate-preview" onclick="openModal('Certificato Fortinet', 'assets/images/certificates/fortinet.jpg')">
+                            <img src="assets/images/certificates/fortinet.jpg" alt="Certificato Fortinet" 
+                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300/3b82f6/ffffff?text=Fortinet'">
+                            <div class="certificate-preview-overlay">Clicca per ingrandire</div>
                         </div>
-                        <button class="btn btn-primary btn-small" onclick="openModal('Certificato Fortinet')">Visualizza</button>
+                        <button class="btn btn-primary btn-small" onclick="openModal('Certificato Fortinet', 'assets/images/certificates/fortinet.jpg')">Visualizza</button>
                     </div>
                 </div>
 
+                <!-- 3CX Basic -->
                 <div class="certification-item">
                     <div class="certification-badge">Certificazione</div>
                     <div class="certification-icon">📞</div>
@@ -1304,13 +1354,16 @@
                         <h3>3CX Basic</h3>
                         <p>Basic Certified Engineer - competenze fondamentali sui sistemi VoIP</p>
                         <div class="certification-level">Livello Base</div>
-                        <div class="certificate-placeholder" onclick="openModal('Certificato 3CX Basic')">
-                            🖼️ Anteprima 3CX Basic
+                        <div class="certificate-preview" onclick="openModal('Certificato 3CX Basic', 'assets/images/certificates/3cx-basic.jpg')">
+                            <img src="assets/images/certificates/3cx-basic.jpg" alt="Certificato 3CX Basic" 
+                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300/3b82f6/ffffff?text=3CX+Basic'">
+                            <div class="certificate-preview-overlay">Clicca per ingrandire</div>
                         </div>
-                        <button class="btn btn-primary btn-small" onclick="openModal('Certificato 3CX Basic')">Visualizza</button>
+                        <button class="btn btn-primary btn-small" onclick="openModal('Certificato 3CX Basic', 'assets/images/certificates/3cx-basic.jpg')">Visualizza</button>
                     </div>
                 </div>
 
+                <!-- 3CX Intermediate -->
                 <div class="certification-item">
                     <div class="certification-badge">Certificazione</div>
                     <div class="certification-icon">📞</div>
@@ -1318,29 +1371,33 @@
                         <h3>3CX Intermediate</h3>
                         <p>Intermediate Certified Engineer - competenze avanzate sui sistemi VoIP</p>
                         <div class="certification-level">Livello Intermedio</div>
-                        <div class="certificate-placeholder" onclick="openModal('Certificato 3CX Intermediate')">
-                            🖼️ Anteprima 3CX Intermediate
+                        <div class="certificate-preview" onclick="openModal('Certificato 3CX Intermediate', 'assets/images/certificates/3cx-intermediate.jpg')">
+                            <img src="assets/images/certificates/3cx-intermediate.jpg" alt="Certificato 3CX Intermediate" 
+                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300/3b82f6/ffffff?text=3CX+Intermediate'">
+                            <div class="certificate-preview-overlay">Clicca per ingrandire</div>
                         </div>
-                        <button class="btn btn-primary btn-small" onclick="openModal('Certificato 3CX Intermediate')">Visualizza</button>
+                        <button class="btn btn-primary btn-small" onclick="openModal('Certificato 3CX Intermediate', 'assets/images/certificates/3cx-intermediate.jpg')">Visualizza</button>
                     </div>
                 </div>
 
-               <div class="certification-item">
-    <div class="certification-badge">Certificazione</div>
-    <div class="certification-icon">📞</div>
-    <div class="certification-info">
-        <h3>3CX Advanced</h3>
-        <p>Advanced Certified Engineer - competenze expert sui sistemi VoIP</p>
-        <div class="certification-level">Livello Avanzato</div>
-        <div class="certificate-preview" onclick="openCertificateModal('3CX Advanced', 'assets/certificates/3cx-advanced.jpg')">
-            <img src="assets/immages/certificates/3cx-advanced.jpg" alt="Certificato 3CX Advanced" 
-                 onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300/3b82f6/ffffff?text=3CX+Advanced'">
-            <div class="certificate-preview-overlay">Clicca per ingrandire</div>
-        </div>
-        <button class="btn btn-primary btn-small" onclick="openCertificateModal('3CX Advanced', 'assets/certificates/3cx-advanced.jpg')">Visualizza</button>
-    </div>
-</div>
+                <!-- 3CX Advanced -->
+                <div class="certification-item">
+                    <div class="certification-badge">Certificazione</div>
+                    <div class="certification-icon">📞</div>
+                    <div class="certification-info">
+                        <h3>3CX Advanced</h3>
+                        <p>Advanced Certified Engineer - competenze expert sui sistemi VoIP</p>
+                        <div class="certification-level">Livello Avanzato</div>
+                        <div class="certificate-preview" onclick="openModal('Certificato 3CX Advanced', 'assets/images/certificates/3cx-advanced.jpg')">
+                            <img src="assets/images/certificates/3cx-advanced.jpg" alt="Certificato 3CX Advanced" 
+                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300/3b82f6/ffffff?text=3CX+Advanced'">
+                            <div class="certificate-preview-overlay">Clicca per ingrandire</div>
+                        </div>
+                        <button class="btn btn-primary btn-small" onclick="openModal('Certificato 3CX Advanced', 'assets/images/certificates/3cx-advanced.jpg')">Visualizza</button>
+                    </div>
+                </div>
 
+                <!-- Abilitazione B016 -->
                 <div class="certification-item">
                     <div class="certification-badge">Abilitazione</div>
                     <div class="certification-icon">👨‍🏫</div>
@@ -1348,38 +1405,42 @@
                         <h3>Abilitazione B016</h3>
                         <p>Abilitazione all'insegnamento - Classe di concorso B016</p>
                         <div class="certification-level">Abilitazione Professionale</div>
-                        <div class="certificate-placeholder" onclick="openModal('Abilitazione B016')">
-                            🖼️ Anteprima Abilitazione
+                        <div class="certificate-preview" onclick="openModal('Abilitazione B016', 'assets/images/certificates/abilitazione-b016.jpg')">
+                            <img src="assets/images/certificates/abilitazione-b016.jpg" alt="Abilitazione B016" 
+                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300/3b82f6/ffffff?text=B016'">
+                            <div class="certificate-preview-overlay">Clicca per ingrandire</div>
                         </div>
-                        <button class="btn btn-primary btn-small" onclick="openModal('Abilitazione B016')">Visualizza</button>
+                        <button class="btn btn-primary btn-small" onclick="openModal('Abilitazione B016', 'assets/images/certificates/abilitazione-b016.jpg')">Visualizza</button>
                     </div>
                 </div>
-                
-                      <div class="certification-item">
+
+                <!-- Formatore -->
+                <div class="certification-item">
                     <div class="certification-badge">Attestato</div>
                     <div class="certification-icon">👨‍🏫</div>
                     <div class="certification-info">
                         <h3>Formatore</h3>
-                        <p>CORSO DI FORMAZIONE PER FORMATORI IN MATERIA DI SICUREZZA E SALUTE NEI LUOGHI DI LAVORO </p>
+                        <p>CORSO DI FORMAZIONE PER FORMATORI IN MATERIA DI SICUREZZA E SALUTE NEI LUOGHI DI LAVORO</p>
                         <div class="certification-level">Abilitazione Professionale</div>
-                        <div class="certificate-placeholder" onclick="openModal('Abilitazione formatore')">
-                            🖼️ Anteprima Abilitazione
+                        <div class="certificate-preview" onclick="openModal('Attestato Formatore', 'assets/images/certificates/formatore.jpg')">
+                            <img src="assets/images/certificates/formatore.jpg" alt="Attestato Formatore" 
+                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300/3b82f6/ffffff?text=Formatore'">
+                            <div class="certificate-preview-overlay">Clicca per ingrandire</div>
                         </div>
-                        <button class="btn btn-primary btn-small" onclick="openCertificateModal('Abilitazione B016', 'https://github.com/marcobrunetti14-crypto/cvbrunetti.github.io-/blob/main/assets/images/certificates/abilitazione-b016.jpg')">Visualizza</button>
-
-                  </div>
+                        <button class="btn btn-primary btn-small" onclick="openModal('Attestato Formatore', 'assets/images/certificates/formatore.jpg')">Visualizza</button>
+                    </div>
                 </div>
-                
             </div>
         </div>
     </section>
 
-    <!-- Modal -->
+    <!-- Modal AGGIORNATO -->
     <div id="certificateModal" class="modal">
         <span class="close" onclick="closeModal()">&times;</span>
         <div class="modal-content" id="modalImage">
-            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
-                <p>Anteprima del certificato</p>
+            <img id="modalImg" src="" alt="" style="width:100%;height:100%;object-fit:contain;display:none;">
+            <div id="modalPlaceholder" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; background: rgba(0,0,0,0.5);">
+                <p>Caricamento certificato...</p>
             </div>
         </div>
     </div>
@@ -1506,9 +1567,35 @@
             observer.observe(el);
         });
 
-        // Modal functions
-        function openModal(caption) {
+        // Modal functions - VERSIONE AGGIORNATA
+        function openModal(caption, imageUrl = null) {
             const modal = document.getElementById('certificateModal');
+            const modalImg = document.getElementById('modalImg');
+            const modalPlaceholder = document.getElementById('modalPlaceholder');
+            
+            if (imageUrl) {
+                modalPlaceholder.style.display = 'flex';
+                modalPlaceholder.innerHTML = '<p>Caricamento certificato...</p>';
+                modalImg.style.display = 'none';
+                modalImg.src = imageUrl;
+                modalImg.alt = caption;
+                
+                modalImg.onload = function() {
+                    modalPlaceholder.style.display = 'none';
+                    modalImg.style.display = 'block';
+                };
+                
+                modalImg.onerror = function() {
+                    modalPlaceholder.innerHTML = '<p>Immagine non disponibile</p>';
+                    modalPlaceholder.style.display = 'flex';
+                    modalImg.style.display = 'none';
+                };
+            } else {
+                modalPlaceholder.innerHTML = `<p>${caption}</p>`;
+                modalPlaceholder.style.display = 'flex';
+                modalImg.style.display = 'none';
+            }
+            
             modal.style.display = "block";
             document.body.style.overflow = 'hidden';
         }
@@ -1548,6 +1635,15 @@
 
         document.querySelectorAll('.skill-category').forEach(el => {
             skillObserver.observe(el);
+        });
+
+        // Preload images for better user experience
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.certificate-preview img');
+            images.forEach(img => {
+                const tempImage = new Image();
+                tempImage.src = img.src;
+            });
         });
     </script>
 </body>
