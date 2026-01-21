@@ -6,18 +6,17 @@
     <title>Marco Brunetti - Insegnante Tecnico Pratico</title>
     <style>
         :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --text: #333;
-            --text-light: #777;
+            --primary: #0f172a;
+            --secondary: #3b82f6;
+            --accent: #8b5cf6;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --text: #334155;
+            --text-light: #64748b;
             --white: #ffffff;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-            --border-radius: 8px;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            --gradient-3: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
         }
 
         * {
@@ -31,10 +30,11 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
             color: var(--text);
             overflow-x: hidden;
+            background: var(--white);
         }
 
         .container {
@@ -48,14 +48,16 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
             z-index: 1000;
-            transition: var(--transition);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .navbar.scrolled {
-            box-shadow: var(--shadow);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
         }
 
         .nav-container {
@@ -65,30 +67,51 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 70px;
+            height: 80px;
         }
 
         .nav-logo a {
             font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
+            font-weight: 800;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-decoration: none;
+            letter-spacing: -0.5px;
         }
 
         .nav-menu {
             display: flex;
-            gap: 2rem;
+            gap: 3rem;
         }
 
         .nav-link {
             color: var(--text);
             text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-2);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .nav-link:hover {
             color: var(--secondary);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
         }
 
         /* === HERO SECTION === */
@@ -96,127 +119,232 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, var(--primary), var(--dark));
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             color: var(--white);
-            padding: 100px 0;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: moveBackground 20s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
         }
 
         .hero-content {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 5rem;
             align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: fadeInUp 1s ease-out 0.2s both;
         }
 
         .hero-title {
-            font-size: 3rem;
-            font-weight: 700;
-            line-height: 1.2;
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.1;
             margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+            animation: fadeInUp 1s ease-out 0.4s both;
         }
 
-        .title-line {
-            display: block;
-            font-size: 1.5rem;
-            font-weight: 400;
-            opacity: 0.9;
-        }
-
-        .title-name {
-            display: block;
-            background: linear-gradient(45deg, var(--secondary), var(--accent));
+        .hero-title .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .title-profession {
-            display: block;
-            font-size: 1.8rem;
-            font-weight: 400;
-            opacity: 0.9;
-        }
-
         .hero-description {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
             opacity: 0.9;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out 0.6s both;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.8s both;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 12px 30px;
-            border-radius: var(--border-radius);
+            gap: 0.75rem;
+            padding: 16px 32px;
+            border-radius: 12px;
             text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: none;
             cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-primary {
-            background: var(--secondary);
+            background: var(--gradient-2);
             color: var(--white);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
         }
 
         .btn-primary:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
         }
 
         .btn-secondary {
-            background: transparent;
+            background: rgba(255, 255, 255, 0.1);
             color: var(--white);
-            border: 2px solid var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
-            background: var(--white);
-            color: var(--primary);
-            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
         }
 
         .btn-small {
-            padding: 8px 16px;
+            padding: 10px 20px;
             font-size: 0.9rem;
+        }
+
+        .hero-image {
+            position: relative;
+            animation: fadeInRight 1s ease-out 0.4s both;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .profile-img {
             width: 100%;
-            max-width: 400px;
+            max-width: 450px;
             height: auto;
-            border-radius: 20px;
-            box-shadow: var(--shadow-lg);
+            border-radius: 30px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-img::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: 20px;
+            bottom: 20px;
+            background: var(--gradient-2);
+            border-radius: 30px;
+            z-index: -1;
+            opacity: 0.3;
         }
 
         /* === SECTIONS === */
         section {
-            padding: 80px 0;
+            padding: 100px 0;
+            position: relative;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--secondary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            padding: 8px 20px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 20px;
         }
 
         .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 3rem;
+            font-weight: 900;
             color: var(--primary);
             margin-bottom: 1rem;
+            letter-spacing: -1px;
         }
 
         .section-subtitle {
             font-size: 1.2rem;
             color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         /* === ABOUT SECTION === */
@@ -227,20 +355,37 @@
         .about-content {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 4rem;
+            gap: 5rem;
             align-items: start;
         }
 
+        .about-text {
+            animation: fadeInLeft 0.8s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         .about-text h3 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             margin-bottom: 1.5rem;
             color: var(--primary);
+            font-weight: 800;
         }
 
         .about-text p {
             margin-bottom: 1.5rem;
             color: var(--text-light);
-            line-height: 1.8;
+            line-height: 1.9;
+            font-size: 1.05rem;
         }
 
         .about-stats {
@@ -252,35 +397,49 @@
 
         .stat-item {
             text-align: center;
-            padding: 1.5rem;
-            background: var(--light);
-            border-radius: var(--border-radius);
+            padding: 2rem 1rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
         }
 
         .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--secondary);
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 0.5rem;
         }
 
         .stat-label {
-            color: var(--text-light);
-            font-weight: 500;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.95rem;
         }
 
         .about-info {
-            background: var(--light);
-            padding: 2rem;
-            border-radius: var(--border-radius);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            padding: 2.5rem;
+            border-radius: 25px;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            animation: fadeInRight 0.8s ease-out;
         }
 
         .info-item {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .info-item:last-child {
@@ -289,68 +448,122 @@
         }
 
         .info-item strong {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-item span {
             color: var(--primary);
-            min-width: 120px;
+            font-weight: 600;
+            font-size: 1.05rem;
         }
 
         /* === EXPERIENCE SECTION === */
         .experience {
-            background: var(--light);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.02) 0%, rgba(139, 92, 246, 0.02) 100%);
         }
 
         .timeline {
             position: relative;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--secondary) 0%, var(--accent) 100%);
         }
 
         .timeline-item {
             background: var(--white);
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow);
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin-bottom: 2.5rem;
+            margin-left: 100px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            position: relative;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -58px;
+            top: 40px;
+            width: 16px;
+            height: 16px;
+            background: var(--white);
+            border: 4px solid var(--secondary);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 50px rgba(59, 130, 246, 0.15);
         }
 
         .timeline-date {
-            background: var(--secondary);
+            background: var(--gradient-2);
             color: var(--white);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 700;
             display: inline-block;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
         }
 
         .timeline-content h3 {
             color: var(--primary);
             margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
         }
 
         .timeline-content h4 {
             color: var(--secondary);
             margin-bottom: 1rem;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 1.1rem;
         }
 
         .timeline-content p {
             color: var(--text-light);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
         }
 
         .timeline-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.75rem;
         }
 
         .tag {
-            background: var(--light);
-            color: var(--primary);
-            padding: 4px 12px;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--secondary);
+            padding: 6px 16px;
             border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: var(--secondary);
+            color: var(--white);
+            transform: translateY(-2px);
         }
 
         /* === SKILLS SECTION === */
@@ -360,166 +573,227 @@
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 3rem;
+        }
+
+        .skill-category {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            padding: 2.5rem;
+            border-radius: 25px;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(59, 130, 246, 0.15);
         }
 
         .skill-category h3 {
             color: var(--primary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             font-size: 1.5rem;
+            font-weight: 800;
         }
 
         .skill-items {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
         .skill-item {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.75rem;
         }
 
         .skill-name {
             display: flex;
             justify-content: space-between;
-            font-weight: 500;
+            font-weight: 700;
             color: var(--primary);
+            font-size: 1.05rem;
         }
 
         .skill-bar {
-            height: 8px;
-            background: var(--light);
-            border-radius: 4px;
+            height: 12px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 10px;
             overflow: hidden;
+            position: relative;
         }
 
         .skill-progress {
             height: 100%;
-            background: linear-gradient(90deg, var(--secondary), var(--accent));
-            border-radius: 4px;
+            background: var(--gradient-2);
+            border-radius: 10px;
             width: 0;
-            transition: width 1.5s ease;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         /* === CERTIFICATIONS SECTION === */
         .certifications {
-            background: var(--light);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.02) 0%, rgba(139, 92, 246, 0.02) 100%);
         }
 
         .certifications-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
 
         .certification-item {
             background: var(--white);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
+            padding: 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
             text-align: center;
-            transition: all 0.3s ease;
-            border-top: 5px solid var(--secondary);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(59, 130, 246, 0.1);
             position: relative;
+            overflow: hidden;
+        }
+
+        .certification-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient-2);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .certification-item:hover::before {
+            transform: scaleX(1);
         }
 
         .certification-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-15px);
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.2);
         }
 
         .certification-badge {
-            background: var(--accent);
+            background: var(--gradient-2);
             color: var(--white);
-            padding: 5px 12px;
+            padding: 6px 16px;
             border-radius: 20px;
             font-size: 0.8rem;
-            font-weight: 600;
+            font-weight: 700;
             display: inline-block;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .certification-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--secondary);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1rem;
-            color: var(--white);
-            font-size: 1.5rem;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .certification-item:hover .certification-icon {
+            transform: rotateY(360deg);
+            background: var(--gradient-2);
         }
 
         .certification-info h3 {
             color: var(--primary);
             margin-bottom: 1rem;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
+            font-weight: 800;
         }
 
         .certification-info p {
             color: var(--text-light);
-            line-height: 1.6;
-            margin-bottom: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
         }
 
         .certification-level {
             display: inline-block;
-            background: var(--light);
-            color: var(--primary);
-            padding: 4px 12px;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--secondary);
+            padding: 6px 16px;
             border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
         }
 
-        /* === ANTEPRIME CERTIFICATI - STILE CORRETTO === */
         .certificate-preview {
             width: 100%;
-            max-width: 200px;
-            height: 150px;
+            max-width: 220px;
+            height: 160px;
             object-fit: cover;
-            border-radius: 8px;
-            margin: 0 auto 1rem;
+            border-radius: 15px;
+            margin: 0 auto 1.5rem;
             cursor: pointer;
-            transition: transform 0.3s ease;
-            border: 2px solid var(--light);
+            transition: all 0.4s ease;
+            border: 2px solid rgba(59, 130, 246, 0.1);
             display: block;
         }
 
         .certificate-preview:hover {
-            transform: scale(1.05);
+            transform: scale(1.05) rotate(2deg);
             border-color: var(--secondary);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
         }
 
         .certificate-placeholder {
-            width: 200px;
-            height: 150px;
-            background: var(--light);
+            width: 220px;
+            height: 160px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
             border: 2px dashed var(--secondary);
-            border-radius: 8px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1rem;
+            margin: 0 auto 1.5rem;
             color: var(--text-light);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-weight: 600;
         }
 
         .certificate-placeholder:hover {
-            background: var(--secondary);
+            background: var(--gradient-2);
             color: var(--white);
             transform: scale(1.05);
+            border-style: solid;
         }
 
-        /* === MODAL PER CERTIFICATI === */
+        /* === MODAL === */
         .modal {
             display: none;
             position: fixed;
@@ -528,7 +802,8 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
             animation: fadeIn 0.3s ease;
         }
 
@@ -538,23 +813,44 @@
             max-width: 90%;
             max-height: 90%;
             margin-top: 2%;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
         .close {
             position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
+            top: 30px;
+            right: 50px;
+            color: #fff;
+            font-size: 50px;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            backdrop-filter: blur(10px);
         }
 
         .close:hover {
-            color: var(--accent);
+            background: var(--accent);
+            transform: rotate(90deg);
         }
 
         .modal-caption {
@@ -563,14 +859,10 @@
             width: 80%;
             max-width: 700px;
             text-align: center;
-            color: #ccc;
-            padding: 10px 0;
-            font-size: 1.2rem;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            color: #fff;
+            padding: 20px 0;
+            font-size: 1.3rem;
+            font-weight: 600;
         }
 
         /* === CONTACT SECTION === */
@@ -580,8 +872,8 @@
 
         .contact-content {
             display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 4rem;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 5rem;
         }
 
         .contact-info {
@@ -592,53 +884,70 @@
 
         .contact-item {
             display: flex;
-            align-items: center;
-            gap: 1rem;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
         }
 
         .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--light);
-            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-2);
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--secondary);
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+            flex-shrink: 0;
         }
 
         .contact-details h4 {
             color: var(--primary);
             margin-bottom: 0.5rem;
+            font-weight: 800;
+            font-size: 1.1rem;
         }
 
         .contact-details p {
             color: var(--text-light);
+            font-weight: 600;
         }
 
         .contact-form {
-            background: var(--light);
-            padding: 2rem;
-            border-radius: var(--border-radius);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            padding: 3rem;
+            border-radius: 25px;
+            border: 1px solid rgba(59, 130, 246, 0.1);
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 1rem;
-            border: 1px solid #ddd;
-            border-radius: var(--border-radius);
+            padding: 1.25rem;
+            border: 2px solid rgba(59, 130, 246, 0.1);
+            border-radius: 15px;
             font-size: 1rem;
-            transition: var(--transition);
+            transition: all 0.3s ease;
+            background: var(--white);
+            font-family: inherit;
+            font-weight: 500;
         }
 
         .form-group textarea {
-            height: 120px;
+            height: 150px;
             resize: vertical;
         }
 
@@ -646,583 +955,8 @@
         .form-group textarea:focus {
             outline: none;
             border-color: var(--secondary);
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
         }
 
-        /* === FOOTER === */
-        .footer {
-            background: var(--primary);
-            color: var(--white);
-            padding: 2rem 0;
-            text-align: center;
-        }
-
-        /* === RESPONSIVE === */
-        @media (max-width: 768px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
-            .about-stats {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-content {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-menu {
-                display: none;
-            }
-
-            .modal-content {
-                max-width: 95%;
-                margin-top: 5%;
-            }
-
-            .close {
-                top: 10px;
-                right: 20px;
-                font-size: 30px;
-            }
-
-            .certificate-preview,
-            .certificate-placeholder {
-                max-width: 150px;
-                height: 120px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="#home">Marco Brunetti</a>
-            </div>
-            <div class="nav-menu">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#experience" class="nav-link">Esperienze</a>
-                <a href="#skills" class="nav-link">Competenze</a>
-                <a href="#certifications" class="nav-link">Certificazioni</a>
-                <a href="#contact" class="nav-link">Contatti</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="hero-title">
-                        <span class="title-line">Ciao, sono</span>
-                        <span class="title-name">Marco Brunetti</span>
-                        <span class="title-profession">Insegnante Tecnico Pratico di Informatica</span>
-                    </h1>
-                    <p class="hero-description">
-                        Professionista con esperienza nell'ambito dei sistemi informatici e una grande passione per la cybersecurity.
-                        Credo profondamente nel potere della conoscenza condivisa e nella formazione come strumento di crescita.
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="#contact" class="btn btn-primary">Contattami</a>
-                        <a href="#about" class="btn btn-secondary">Scopri di più</a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <img src="assets/images/profile.jpg" alt="Marco Brunetti" class="profile-img" onerror="this.style.display='none'">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Chi Sono?</h2>
-                <p class="section-subtitle">Scopri di più sul mio percorso</p>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>
-                        Sono un professionista del settore informatico con esperienza nella gestione di reti, infrastrutture e sistemi IT,
-                        maturata in contesti aziendali e successivamente trasferita al mondo della didattica e della formazione tecnica.
-                    </p>
-                    <p>
-                        Attualmente lavoro come Insegnante Tecnico Pratico di Informatica, ruolo attraverso il quale trasformo le competenze
-                        operative acquisite in aula e laboratorio in percorsi di apprendimento chiari, concreti e orientati al lavoro.
-                    </p>
-                    <p>
-                        Mi contraddistingue una forte capacità di problem solving, attenzione alla sicurezza delle reti e predisposizione
-                        alla condivisione delle conoscenze. Credo che l'informatica sia un mezzo per sviluppare autonomia, consapevolezza
-                        e orientamento professionale.
-                    </p>
-
-                    <div class="about-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">6+</div>
-                            <div class="stat-label">Anni di Esperienza</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">13</div>
-                            <div class="stat-label">Certificazioni</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">3+</div>
-                            <div class="stat-label">Anni Insegnamento</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-info">
-                    <div class="info-item">
-                        <strong>Nome:</strong>
-                        <span>Marco Brunetti</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Email:</strong>
-                        <span>marcobrunetti14@gmail.com</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Telefono:</strong>
-                        <span>+39 388 432 9570</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Località:</strong>
-                        <span>Caltagirone, Italia</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Disponibilità:</strong>
-                        <span>Aperto a nuove opportunità</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="experience">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Esperienze Lavorative</h2>
-                <p class="section-subtitle">Il mio percorso professionale</p>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">Mag 2022 - Presente</div>
-                    <div class="timeline-content">
-                        <h3>Insegnante Tecnico Pratico di Informatica</h3>
-                        <h4>Istituto Scolastico</h4>
-                        <p>Insegnante curriculare e responsabile dell'ufficio tecnico. Abilitazione sulla classe di concorso B016 - Laboratorio di Scienze e Tecnologie Informatiche.</p>
-                        <div class="timeline-tags">
-                            <span class="tag">Didattica</span>
-                            <span class="tag">Formazione</span>
-                            <span class="tag">Tecnologie Informatiche</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">Gen 2019 - Set 2022</div>
-                    <div class="timeline-content">
-                        <h3>Junior System Engineer</h3>
-                        <h4>ITLAB srl - Ragusa</h4>
-                        <p>Installazione e manutenzione hardware e software, help desk primo e secondo livello, analisi requisiti clienti, gestione Windows Server, realizzazione e manutenzione centralini, gestione firewall e VPN.</p>
-                        <div class="timeline-tags">
-                            <span class="tag">Windows Server</span>
-                            <span class="tag">Help Desk</span>
-                            <span class="tag">Reti</span>
-                            <span class="tag">Firewall</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">Gen 2017 - Nov 2019</div>
-                    <div class="timeline-content">
-                        <h3>Autista</h3>
-                        <h4>Esercito Italiano - Sassari</h4>
-                        <p>Servizio come autista con collaborazione presso l'ufficio IT durante il periodo di servizio.</p>
-                        <div class="timeline-tags">
-                            <span class="tag">Supporto IT</span>
-                            <span class="tag">Logistica</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Competenze Tecniche</h2>
-                <p class="section-subtitle">Le mie aree di specializzazione</p>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Reti e Cybersecurity</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">Network Infrastructure</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 95%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Cybersecurity</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Firewall & VPN</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 88%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Sistemi e Server</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">Windows Server</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Help Desk</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 92%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Centralini VoIP</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 80%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Insegnamento e Formazione</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">Didattica Informatica</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Formazione Tecnica</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 88%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Laboratorio Informatico</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certifications Section - VERSIONE CORRETTA -->
-    <section id="certifications" class="certifications">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Certificazioni</h2>
-                <p class="section-subtitle">Le mie qualifiche professionali</p>
-            </div>
-            <div class="certifications-grid">
-                <!-- CCNA -->
-                <div class="certification-item">
-                    <div class="certification-badge">Corso</div>
-                    <div class="certification-icon">📡</div>
-                    <div class="certification-info">
-                        <h3>CCNA</h3>
-                        <p>Formazione completa sulle reti Cisco - competenze avanzate in network infrastructure</p>
-                        <div class="certification-level">Livello Avanzato</div>
-                        <img src="assets/images/certificates/ccna.jpg" alt="Certificato CCNA" class="certificate-preview" onclick="openModal('assets/images/certificates/ccna.jpg', 'Certificato CCNA')" onerror="this.style.display='none'; document.getElementById('ccna-placeholder').style.display='flex';">
-                        <div class="certificate-placeholder" id="ccna-placeholder" onclick="openModal('assets/images/certificates/ccna.jpg', 'Certificato CCNA')">
-                            🖼️ Anteprima CCNA
-                        </div>
-                        
-                    </div>
-                </div>
-
-                <!-- EnGenius -->
-                <div class="certification-item">
-                    <div class="certification-badge">Certificazione</div>
-                    <div class="certification-icon">📶</div>
-                    <div class="certification-info">
-                        <h3>EnGenius Certified</h3>
-                        <p>Wireless Professional, Security Professional, Network Professional</p>
-                        <div class="certification-level">Livello Avanzato</div>
-                        <img src="assets/images/certificates/engenius.jpg" alt="Certificato EnGenius" class="certificate-preview" onclick="openModal('assets/images/certificates/engenius.jpg', 'Certificato EnGenius')" onerror="this.style.display='none'; document.getElementById('engenius-placeholder').style.display='flex';">
-                        <div class="certificate-placeholder" id="engenius-placeholder" onclick="openModal('assets/images/certificates/engenius.jpg', 'Certificato EnGenius')">
-                            🖼️ Anteprima EnGenius
-                        </div>
-                        <button class="btn btn-primary btn-small" onclick="openModal('assets/images/certificates/engenius.jpg', 'Certificato EnGenius')">Visualizza Certificato</button>
-                    </div>
-                </div>
-
-                <!-- Fortinet -->
-                <div class="certification-item">
-                    <div class="certification-badge">Certificazione</div>
-                    <div class="certification-icon">🛡️</div>
-                    <div class="certification-info">
-                        <h3>Fortinet Cybersecurity</h3>
-                        <p>The Evolution of Cybersecurity - Certified Network Specialist</p>
-                        <div class="certification-level">Livello Avanzato</div>
-                        <img src="assets/images/certificates/fortinet-cybersecurity.jpg" alt="Certificato Fortinet" class="certificate-preview" onclick="openModal('assets/images/certificates/fortinet-cybersecurity.jpg', 'Certificato Fortinet')" onerror="this.style.display='none'; document.getElementById('fortinet-placeholder').style.display='flex';">
-                        <div class="certificate-placeholder" id="fortinet-placeholder" onclick="openModal('assets/images/certificates/fortinet-cybersecurity.jpg', 'Certificato Fortinet')">
-                            🖼️ Anteprima Fortinet
-                        </div>
-                        <button class="btn btn-primary btn-small" onclick="openModal('assets/images/certificates/fortinet-cybersecurity.jpg', 'Certificato Fortinet')">Visualizza Certificato</button>
-                    </div>
-                </div>
-
-                <!-- 3CX Basic -->
-                <div class="certification-item">
-                    <div class="certification-badge">Certificazione</div>
-                    <div class="certification-icon">📞</div>
-                    <div class="certification-info">
-                        <h3>3CX Basic</h3>
-                        <p>Basic Certified Engineer - competenze fondamentali sui sistemi VoIP</p>
-                        <div class="certification-level">Livello Base</div>
-                        <img src="assets/images/certificates/3cx-basic.jpg" alt="Certificato 3CX Basic" class="certificate-preview" onclick="openModal('assets/images/certificates/3cx-basic.jpg', 'Certificato 3CX Basic')" onerror="this.style.display='none'; document.getElementById('3cx-basic-placeholder').style.display='flex';">
-                        <div class="certificate-placeholder" id="3cx-basic-placeholder" onclick="openModal('assets/images/certificates/3cx-basic.jpg', 'Certificato 3CX Basic')">
-                            🖼️ Anteprima 3CX Basic
-                        </div>
-                        <button class="btn btn-primary btn-small" onclick="openModal('assets/images/certificates/3cx-basic.jpg', 'Certificato 3CX Basic')">Visualizza Certificato</button>
-                    </div>
-                </div>
-
-                <!-- 3CX Intermediate -->
-                <div class="certification-item">
-                    <div class="certification-badge">Certificazione</div>
-                    <div class="certification-icon">📞</div>
-                    <div class="certification-info">
-                        <h3>3CX Intermediate</h3>
-                        <p>Intermediate Certified Engineer - competenze avanzate sui sistemi VoIP</p>
-                        <div class="certification-level">Livello Intermedio</div>
-                        <img src="assets/images/certificates/3cx-intermediate.jpg" alt="Certificato 3CX Intermediate" class="certificate-preview" onclick="openModal('assets/images/certificates/3cx-intermediate.jpg', 'Certificato 3CX Intermediate')" onerror="this.style.display='none'; document.getElementById('3cx-intermediate-placeholder').style.display='flex';">
-                        <div class="certificate-placeholder" id="3cx-intermediate-placeholder" onclick="openModal('assets/images/certificates/3cx-intermediate.jpg', 'Certificato 3CX Intermediate')">
-                            🖼️ Anteprima 3CX Intermediate
-                        </div>
-                        <button class="btn btn-primary btn-small" onclick="openModal('assets/images/certificates/3cx-intermediate.jpg', 'Certificato 3CX Intermediate')">Visualizza Certificato</button>
-                    </div>
-                </div>
-
-                <!-- 3CX Advanced -->
-                <div class="certification-item">
-                    <div class="certification-badge">Certificazione</div>
-                    <div class="certification-icon">📞</div>
-                    <div class="certification-info">
-                        <h3>3CX Advanced</h3>
-                        <p>Advanced Certified Engineer - competenze expert sui sistemi VoIP</p>
-                        <div class="certification-level">Livello Avanzato</div>
-                        <img src="assets/images/certificates/3cx-advanced.jpg" alt="Certificato 3CX Advanced" class="certificate-preview" onclick="openModal('assets/images/certificates/3cx-advanced.jpg', 'Certificato 3CX Advanced')" onerror="this.style.display='none'; document.getElementById('3cx-advanced-placeholder').style.display='flex';">
-                        <div class="certificate-placeholder" id="3cx-advanced-placeholder" onclick="openModal('assets/images/certificates/3cx-advanced.jpg', 'Certificato 3CX Advanced')">
-                            🖼️ Anteprima 3CX Advanced
-                        </div>
-                        <button class="btn btn-primary btn-small" onclick="openModal('assets/images/certificates/3cx-advanced.jpg', 'Certificato 3CX Advanced')">Visualizza Certificato</button>
-                    </div>
-                </div>
-
-                <!-- Abilitazione B016 -->
-                <div class="certification-item">
-                    <div class="certification-badge">Abilitazione</div>
-                    <div class="certification-icon">👨‍🏫</div>
-                    <div class="certification-info">
-                        <h3>Abilitazione B016</h3>
-                        <p>Abilitazione all'insegnamento - Classe di concorso B016</p>
-                        <div class="certification-level">Abilitazione Professionale</div>
-                        <img src="assets/images/certificates/abilitazione-b016.jpg" alt="Abilitazione B016" class="certificate-preview" onclick="openModal('assets/images/certificates/abilitazione-b016.jpg', 'Abilitazione B016')" onerror="this.style.display='none'; document.getElementById('b016-placeholder').style.display='flex';">
-                        <div class="certificate-placeholder" id="b016-placeholder" onclick="openModal('assets/images/certificates/abilitazione-b016.jpg', 'Abilitazione B016')">
-                            🖼️ Anteprima Abilitazione
-                        </div>
-                        <button class="btn btn-primary btn-small" onclick="openModal('assets/images/certificates/abilitazione-b016.jpg', 'Abilitazione B016')">Visualizza Certificato</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Modal per i certificati -->
-    <div id="certificateModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modalImage">
-        <div class="modal-caption" id="modalCaption"></div>
-    </div>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Contattami</h2>
-                <p class="section-subtitle">Restiamo in contatto</p>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">📧</div>
-                        <div class="contact-details">
-                            <h4>Email</h4>
-                            <p>marcobrunetti14@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">📱</div>
-                        <div class="contact-details">
-                            <h4>Telefono</h4>
-                            <p>+39 388 432 9570</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">📍</div>
-                        <div class="contact-details">
-                            <h4>Località</h4>
-                            <p>Caltagirone, Italia</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" placeholder="Nome Completo" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="Oggetto" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea placeholder="Messaggio" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Invia Messaggio</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Marco Brunetti. Tutti i diritti riservati.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Grazie per il tuo messaggio! Ti risponderò al più presto.');
-            this.reset();
-        });
-
-        // Animate skill bars on scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const skillBars = entry.target.querySelectorAll('.skill-progress');
-                    skillBars.forEach(bar => {
-                        const width = bar.style.width;
-                        bar.style.width = '0';
-                        setTimeout(() => {
-                            bar.style.width = width;
-                        }, 100);
-                    });
-                }
-            });
-        });
-
-        observer.observe(document.getElementById('skills'));
-
-        // Modal functions for certificates
-        function openModal(src, caption) {
-            const modal = document.getElementById('certificateModal');
-            const modalImg = document.getElementById('modalImage');
-            const captionText = document.getElementById('modalCaption');
-
-            modal.style.display = "block";
-            modalImg.src = src;
-            captionText.innerHTML = caption;
-        }
-
-        function closeModal() {
-            document.getElementById('certificateModal').style.display = "none";
-        }
-
-        // Close modal when clicking outside the image
-        window.addEventListener('click', function(event) {
-            const modal = document.getElementById('certificateModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        });
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        // Nascondi i placeholder inizialmente (verranno mostrati solo se le immagini non caricano)
-        document.addEventListener('DOMContentLoaded', function() {
-            const placeholders = document.querySelectorAll('.certificate-placeholder');
-            placeholders.forEach(placeholder => {
-                placeholder.style.display = 'none';
-            });
-        });
-    </script>
-</body>
-</html>
+        /* ===
