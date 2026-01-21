@@ -114,6 +114,15 @@
             width: 100%;
         }
 
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
         /* === HERO SECTION === */
         .hero {
             min-height: 100vh;
@@ -698,6 +707,11 @@
             animation: fadeIn 0.3s ease;
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         .modal-content {
             margin: auto;
             display: block;
@@ -869,12 +883,26 @@
         }
 
         @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-
             .mobile-menu-btn {
                 display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
             }
 
             .hero {
@@ -964,6 +992,9 @@
             <div class="nav-logo">
                 <a href="#home">Marco Brunetti</a>
             </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
             <div class="nav-menu">
                 <a href="#home" class="nav-link">Home</a>
                 <a href="#about" class="nav-link">About</a>
@@ -994,11 +1025,6 @@
                     </div>
                 </div>
                 <div class="hero-image">
-  <img src="assets/images/profile.jpg" alt="Marco Brunetti" class="profile-img" 
-         onerror="this.style.display='none'; this.parentElement.querySelector('.profile-img-placeholder').style.display='flex';">
-    <div class="profile-img-placeholder" style="display:none;">
-        <i class="fas fa-user-tie"></i>
-    </div>
                     <div class="profile-img-placeholder">
                         <i class="fas fa-user-tie"></i>
                     </div>
@@ -1008,7 +1034,7 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about">
+    <section id="about" class="about fade-in">
         <div class="container">
             <div class="section-header">
                 <div class="section-label">Chi Sono</div>
@@ -1069,7 +1095,7 @@
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="experience">
+    <section id="experience" class="experience fade-in">
         <div class="container">
             <div class="section-header">
                 <div class="section-label">Carriera</div>
@@ -1123,7 +1149,7 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="skills">
+    <section id="skills" class="skills fade-in">
         <div class="container">
             <div class="section-header">
                 <div class="section-label">Competenze</div>
@@ -1137,19 +1163,19 @@
                         <div class="skill-item">
                             <span class="skill-name">Network Infrastructure <span class="skill-percent">95%</span></span>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 95%"></div>
+                                <div class="skill-progress" data-width="95%"></div>
                             </div>
                         </div>
                         <div class="skill-item">
                             <span class="skill-name">Cybersecurity <span class="skill-percent">90%</span></span>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
+                                <div class="skill-progress" data-width="90%"></div>
                             </div>
                         </div>
                         <div class="skill-item">
                             <span class="skill-name">Firewall & VPN <span class="skill-percent">88%</span></span>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 88%"></div>
+                                <div class="skill-progress" data-width="88%"></div>
                             </div>
                         </div>
                     </div>
@@ -1161,19 +1187,19 @@
                         <div class="skill-item">
                             <span class="skill-name">Windows Server <span class="skill-percent">85%</span></span>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
+                                <div class="skill-progress" data-width="85%"></div>
                             </div>
                         </div>
                         <div class="skill-item">
                             <span class="skill-name">Help Desk <span class="skill-percent">92%</span></span>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 92%"></div>
+                                <div class="skill-progress" data-width="92%"></div>
                             </div>
                         </div>
                         <div class="skill-item">
                             <span class="skill-name">Centralini VoIP <span class="skill-percent">80%</span></span>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 80%"></div>
+                                <div class="skill-progress" data-width="80%"></div>
                             </div>
                         </div>
                     </div>
@@ -1185,19 +1211,19 @@
                         <div class="skill-item">
                             <span class="skill-name">Didattica Informatica <span class="skill-percent">90%</span></span>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
+                                <div class="skill-progress" data-width="90%"></div>
                             </div>
                         </div>
                         <div class="skill-item">
                             <span class="skill-name">Formazione Tecnica <span class="skill-percent">88%</span></span>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 88%"></div>
+                                <div class="skill-progress" data-width="88%"></div>
                             </div>
                         </div>
                         <div class="skill-item">
                             <span class="skill-name">Laboratorio Informatico <span class="skill-percent">85%</span></span>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
+                                <div class="skill-progress" data-width="85%"></div>
                             </div>
                         </div>
                     </div>
@@ -1207,7 +1233,7 @@
     </section>
 
     <!-- Certifications Section -->
-    <section id="certifications" class="certifications">
+    <section id="certifications" class="certifications fade-in">
         <div class="container">
             <div class="section-header">
                 <div class="section-label">Qualifiche</div>
@@ -1327,7 +1353,7 @@
     </div>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <section id="contact" class="contact fade-in">
         <div class="container">
             <div class="section-header">
                 <div class="section-label">Contatti</div>
@@ -1397,6 +1423,21 @@
             }
         });
 
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -1433,11 +1474,6 @@
             observer.observe(el);
         });
 
-        // Add fade-in class to sections
-        document.querySelectorAll('section').forEach(section => {
-            section.classList.add('fade-in');
-        });
-
         // Modal functions
         function openModal(caption) {
             const modal = document.getElementById('certificateModal');
@@ -1471,12 +1507,8 @@
                 if (entry.isIntersecting) {
                     const skillBars = entry.target.querySelectorAll('.skill-progress');
                     skillBars.forEach(bar => {
-                        // Reset width to 0 then animate to target width
-                        bar.style.width = '0%';
-                        setTimeout(() => {
-                            const width = bar.style.width || getComputedStyle(bar).width;
-                            bar.style.width = width;
-                        }, 100);
+                        const width = bar.getAttribute('data-width');
+                        bar.style.width = width;
                     });
                 }
             });
