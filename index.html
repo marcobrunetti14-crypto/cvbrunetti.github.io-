@@ -1025,9 +1025,21 @@
                     </div>
                 </div>
                 <div class="hero-image">
+                    <!-- Opzione 1: Usa il placeholder -->
                     <div class="profile-img-placeholder">
                         <i class="fas fa-user-tie"></i>
                     </div>
+                    
+                    <!-- Opzione 2: Usa un'immagine con fallback al placeholder -->
+                     
+                    <img src="assets/images/nome-foto.jpg"src="assets/images/nome-foto.jpg" 
+                         alt="Marco Brunetti" 
+                         class="profile-img" 
+                         onerror="this.style.display='none'; this.parentElement.querySelector('.profile-img-placeholder').style.display='flex';">
+                    <div class="profile-img-placeholder" style="display:none;">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    
                 </div>
             </div>
         </div>
