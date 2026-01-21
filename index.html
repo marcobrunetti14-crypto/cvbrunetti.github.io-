@@ -1325,19 +1325,21 @@
                     </div>
                 </div>
 
-                <div class="certification-item">
-                    <div class="certification-badge">Certificazione</div>
-                    <div class="certification-icon">📞</div>
-                    <div class="certification-info">
-                        <h3>3CX Advanced</h3>
-                        <p>Advanced Certified Engineer - competenze expert sui sistemi VoIP</p>
-                        <div class="certification-level">Livello Avanzato</div>
-                        <div class="certificate-placeholder" onclick="openModal('Certificato 3CX Advanced')">
-                            🖼️ Anteprima 3CX Advanced
-                        </div>
-                        <button class="btn btn-primary btn-small" onclick="openModal('Certificato 3CX Advanced')">Visualizza</button>
-                    </div>
-                </div>
+               <div class="certification-item">
+    <div class="certification-badge">Certificazione</div>
+    <div class="certification-icon">📞</div>
+    <div class="certification-info">
+        <h3>3CX Advanced</h3>
+        <p>Advanced Certified Engineer - competenze expert sui sistemi VoIP</p>
+        <div class="certification-level">Livello Avanzato</div>
+        <div class="certificate-preview" onclick="openCertificateModal('3CX Advanced', 'assets/certificates/3cx-advanced.jpg')">
+            <img src="assets/certificates/3cx-advanced.jpg" alt="Certificato 3CX Advanced" 
+                 onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300/3b82f6/ffffff?text=3CX+Advanced'">
+            <div class="certificate-preview-overlay">Clicca per ingrandire</div>
+        </div>
+        <button class="btn btn-primary btn-small" onclick="openCertificateModal('3CX Advanced', 'assets/certificates/3cx-advanced.jpg')">Visualizza</button>
+    </div>
+</div>
 
                 <div class="certification-item">
                     <div class="certification-badge">Abilitazione</div>
